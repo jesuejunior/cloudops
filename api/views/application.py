@@ -10,7 +10,7 @@ __author__ = 'jesuejunior'
 class ApplicationNew(generics.CreateAPIView):
 
     """
-        Cadastrar(POST) aplicacoes
+        Cadastrar aplicacoes
     """
     model = Application
     permission_classes = (IsAuthenticated,)
@@ -20,7 +20,7 @@ class ApplicationNew(generics.CreateAPIView):
 
 class ApplicationList(generics.ListAPIView):
     """
-        listar(GET) aplicacoes cadastradas
+        Listar todas aplicacoes cadastradas
     """
     model = Application
     permission_classes = (IsAuthenticated,)
@@ -29,7 +29,7 @@ class ApplicationList(generics.ListAPIView):
 
 class ApplicationEdit(generics.RetrieveUpdateAPIView):
     """
-        listar(GET) aplicacoes cadastradas
+        Editar aplicacoes cadastradas
     """
     model = Application
     permission_classes = (IsAuthenticated,)
@@ -38,7 +38,7 @@ class ApplicationEdit(generics.RetrieveUpdateAPIView):
 
 class ApplicationDetail(generics.RetrieveAPIView):
     """
-        listar(GET) aplicacoes cadastradas
+        Detalhes da aplicacao selecionada
     """
     model = Application
     permission_classes = (IsAuthenticated,)
@@ -47,7 +47,7 @@ class ApplicationDetail(generics.RetrieveAPIView):
 
 class ApplicationDelete(generics.DestroyAPIView):
     """
-        listar(GET) aplicacoes cadastradas
+        Deletar aplicacao selecionada
     """
     model = Application
     permission_classes = (IsAuthenticated,)

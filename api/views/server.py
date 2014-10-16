@@ -1,8 +1,10 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+
 from api.models import Server
 from api.serializers.server import ServerSerializer
+
 
 __author__ = 'jesuejunior'
 
