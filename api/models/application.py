@@ -3,7 +3,7 @@ from django.db import models
 
 class Application(models.Model):
 
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=60, unique=True)
     description = models.TextField()
 
     class Meta:
