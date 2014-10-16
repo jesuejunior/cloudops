@@ -1,7 +1,9 @@
 import json
+
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import pytest
+
 from api.models.server import Server
 from common.testtools import TestCase
 
