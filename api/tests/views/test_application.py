@@ -50,6 +50,18 @@ class ApplicationTest(TestCase):
         assert application.name == self.post['name']
         assert application.description == self.post['description']
 
+    def test_create_application_wrong_post(self):
+        """
+            Teste para criar uma aplicacao com dados errados
+        """
+        self.post['description'] = ''
+        res = self.client.post(reverse('application-new'), self.post, HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
+
+        assert res.status_code == 400
+
+        data = json.loads(res.content)
+        assert data['description'] == ['This field is required.']
+
 
     def test_create_same_application_twice(self):
         u"""
@@ -87,7 +99,8 @@ class ApplicationTest(TestCase):
         assert app_db.description == 'Webserver'
 
         self.post['description'] = 'Super proxy server'
-        res = self.client.put(reverse('application-edit', kwargs={'pk': app.id}), self.post, HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
+        res = self.client.put(reverse('application-edit', kwargs={'pk': app.id}), data=json.dumps(self.post),
+                              content_type='application/json', HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
         assert res.status_code == 200
 
         app_res = Application.objects.get(id=1)
@@ -95,8 +108,13 @@ class ApplicationTest(TestCase):
         assert app_res.description == 'Super proxy server'
 
     def test_delete_application_exist(self):
-        self.fail()
+        app = Application.objects.create(**self.post)
+
+        res = self.client.delete(reverse('application-delete', kwargs={'pk': app.id}), HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
+        assert res.status_code == 204
+        assert Application.objects.count() == 0
+
 
     def test_try_delete_application_not_exist(self):
-        self.fail()
-
+        res = self.client.delete(reverse('application-delete', kwargs={'pk': 4}), HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
+        assert res.status_code == 404
