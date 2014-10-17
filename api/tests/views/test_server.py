@@ -42,6 +42,21 @@ class ServerTest(TestCase):
         u"""
             Teste para criar um server corretamente
         """
+        res = self.client.post(reverse('server-new'), data=json.dumps(self.post), content_type='application/json',
+                               HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
+        assert res.status_code == 201
+
+        server = Server.objects.get(name='cloudops')
+        assert server.name == self.post['name']
+        assert server.ipaddress == self.post['ipaddress']
+        assert server.system_operational == self.post['system_operational']
+
+    def test_create_server_with_apps(self):
+        u"""
+            Teste para criar um servidor com aplicações
+        """
+        self.post['applications'] = [1]
+
         res = self.client.post(reverse('server-new'), self.post, HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
         assert res.status_code == 201
 
@@ -74,6 +89,10 @@ class ServerTest(TestCase):
         assert res.status_code == 400
 
         assert Server.objects.count() == 1
+
+
+
+
 
     def test_update_server_info_patch(self):
         server = Server.objects.create(**self.post)
