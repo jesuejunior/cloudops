@@ -12,7 +12,7 @@ from common.testtools import TestCase
 class ServerTest(TestCase):
     def setUp(self):
         self.server_data = {
-            'name': 'test1',
+            'name': 'cloudops',
             'system_operational': 'Ubuntu',
             'ipaddress': '192.168.1.2'
         }
@@ -45,7 +45,7 @@ class ServerTest(TestCase):
 
         assert res.status_code == 201
 
-        server = Server.objects.get(name='test1')
+        server = Server.objects.get(name='cloudops')
 
         assert server.name == self.server_data['name']
         assert server.ipaddress == self.server_data['ipaddress']

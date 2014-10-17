@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from api.models.application import Application
+from common.helptools import format_unicode
 
 
 class Server(models.Model):
@@ -11,3 +13,6 @@ class Server(models.Model):
 
     class Meta:
         db_table = 'server'
+
+    def __unicode__(self):
+        return format_unicode(self.name)

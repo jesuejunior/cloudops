@@ -7,6 +7,6 @@ class ServerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Server
-        fields = ('id', 'ipaddress', 'system_operational',)
+        fields = ('id', 'name', 'ipaddress', 'system_operational',)
 
 
