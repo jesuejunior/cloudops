@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -8,20 +9,33 @@ from api.serializers.server import ServerSerializer
 
 __author__ = 'jesuejunior'
 
-class ServerNew(generics.CreateAPIView):
-    """
-        Endpoint para criar novo servidor
-    """
+class BaseServerView():
     model = Server
-    serializer_class = ServerSerializer
-    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = ServerSerializer
 
-class ServerList(generics.ListAPIView):
+class ServerNew(BaseServerView, generics.CreateAPIView):
+    u"""
+         Cadastrar novo servidor.
     """
-    Endpoint para listar todos os servidores
+
+class ServerList(BaseServerView, generics.ListAPIView):
+    u"""
+        Listar todos os servidores.
     """
-    model = Server
-    serializer_class = ServerSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+
+class ServerEdit(BaseServerView, generics.RetrieveUpdateAPIView):
+    u"""
+        Editar servidores cadastradas
+    """
+
+class ServerDetail(BaseServerView, generics.RetrieveAPIView):
+    u"""
+        Detalhes do servidor selecionado.
+    """
+
+class ServerDelete(BaseServerView, generics.DestroyAPIView):
+    u"""
+        Deletar servidor selecionado.
+    """

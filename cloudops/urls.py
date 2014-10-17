@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from api.views import ServerList, ServerNew, ApplicationNew, ApplicationList, ApplicationEdit, ApplicationDelete, ApplicationDetail
+
+from api.views import ServerList, ServerNew, ApplicationNew, ApplicationList, ApplicationEdit, ApplicationDelete, ApplicationDetail, ServerDetail, ServerEdit, ServerDelete
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,6 +19,9 @@ urlpatterns = patterns('',
 urlpatterns += patterns('api.views.server',
                         url(r'^servers/$', ServerList.as_view(), name='server-list'),
                         url(r'^servers/new/$', ServerNew.as_view(), name='server-new'),
+                        url(r'^servers/(?P<pk>[\d]+)/detail$', ServerDetail.as_view(), name='server-detail'),
+                        url(r'^servers/(?P<pk>[\d]+)/edit$', ServerEdit.as_view(), name='server-edit'),
+                        url(r'^servers/(?P<pk>[\d]+)/delete$', ServerDelete.as_view(), name='server-delete'),
 
 )
 
