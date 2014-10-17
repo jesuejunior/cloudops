@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 
 from django.contrib.auth.models import User
@@ -22,9 +23,9 @@ class ApplicationTest(TestCase):
         self.data = self.client.post(reverse('auth'), {'username': 'testops', 'password': '123456'})
         self.token = json.loads(self.data.content).get('token')
 
-    # def tearDown(self):
+    def tearDown(self):
         # User.objects.all().delete()
-        # Server.objects.all().delete()
+        Application.objects.all().delete()
 
     def test_list_all_applications(self):
         for i in [1,2,3]:
@@ -51,8 +52,8 @@ class ApplicationTest(TestCase):
 
 
     def test_create_same_application_twice(self):
-        """
-            Testando a criacao da mesma aplicacao
+        u"""
+            Testando a criacao da mesma aplicação
         """
         res = self.client.post(reverse('application-new'), self.post, HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
         assert res.status_code == 201
@@ -62,13 +63,36 @@ class ApplicationTest(TestCase):
 
         assert Application.objects.count() == 1
 
-    def test_update_application_info(self):
+    def test_update_application_info_patch(self):
         app = Application.objects.create(**self.post)
 
-        self.post['description'] = 'Super proxy server'
-        res = self.client.put(reverse('application-edit', {'pk': app.id}), self.post, HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
+        app_db = Application.objects.get(id=1)
+        assert app_db.name == 'Nginx'
+        assert app_db.description == 'Webserver'
 
+        self.post['description'] = 'Super proxy server'
+        res = self.client.patch(reverse('application-edit', kwargs={'pk': app.id}), self.post, HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
         assert res.status_code == 200
+
+        app_res = Application.objects.get(id=1)
+        assert app_res.name == 'Nginx'
+        assert app_res.description == 'Super proxy server'
+
+
+    def test_update_application_info_put(self):
+        app = Application.objects.create(**self.post)
+
+        app_db = Application.objects.get(id=1)
+        assert app_db.name == 'Nginx'
+        assert app_db.description == 'Webserver'
+
+        self.post['description'] = 'Super proxy server'
+        res = self.client.put(reverse('application-edit', kwargs={'pk': app.id}), self.post, HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
+        assert res.status_code == 200
+
+        app_res = Application.objects.get(id=1)
+        assert app_res.name == 'Nginx'
+        assert app_res.description == 'Super proxy server'
 
     def test_delete_application_exist(self):
         self.fail()

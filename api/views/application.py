@@ -1,58 +1,45 @@
+# -*- coding: utf-8 -*-
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+
 from api.models import Application
 from api.serializers.application import ApplicationSerializer
 
+
 __author__ = 'jesuejunior'
 
-
-class ApplicationNew(generics.CreateAPIView):
-
-    """
-        Cadastrar aplicacoes
-    """
+class BaseApplicationView():
     model = Application
     permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
     serializer_class = ApplicationSerializer
 
+class ApplicationNew(BaseApplicationView, generics.CreateAPIView):
+    u"""
+        Cadastrar aplicações
+    """
 
-class ApplicationList(generics.ListAPIView):
+class ApplicationList(BaseApplicationView, generics.ListAPIView):
+    u"""
+        Listar todas as aplicações cadastradas.
     """
-        Listar todas aplicacoes cadastradas
-    """
-    model = Application
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
-    serializer_class = ApplicationSerializer
 
-class ApplicationEdit(generics.RetrieveUpdateAPIView):
+class ApplicationEdit(BaseApplicationView, generics.RetrieveUpdateAPIView):
+    u"""
+        Editar aplicações cadastradas
     """
-        Editar aplicacoes cadastradas
-    """
-    model = Application
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
-    serializer_class = ApplicationSerializer
 
-class ApplicationDetail(generics.RetrieveAPIView):
+class ApplicationDetail(BaseApplicationView, generics.RetrieveAPIView):
+    u"""
+        Detalhes da aplicação selecionada.
     """
-        Detalhes da aplicacao selecionada
-    """
-    model = Application
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
-    serializer_class = ApplicationSerializer
 
-class ApplicationDelete(generics.DestroyAPIView):
+class ApplicationDelete(BaseApplicationView, generics.DestroyAPIView):
+    u"""
+        Deletar aplicação selecionada.
     """
-        Deletar aplicacao selecionada
-    """
-    model = Application
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
-    serializer_class = ApplicationSerializer
+
 
 
 
