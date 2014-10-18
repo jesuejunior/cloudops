@@ -8,5 +8,3 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = ('id', 'name', 'description',)
-
-

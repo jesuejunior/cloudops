@@ -4,7 +4,7 @@ from api.models import Server
 __author__ = 'jesuejunior'
 
 class ServerSerializer(serializers.ModelSerializer):
-    applications = serializers.RelatedField(many=True)
+    applications = serializers.RelatedField(many=True, read_only=False)
 
     class Meta:
         model = Server
