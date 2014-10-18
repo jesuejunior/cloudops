@@ -4,6 +4,7 @@ import json
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import pytest
+from api.models import Application
 
 from api.models.server import Server
 from common.testtools import TestCase
@@ -17,12 +18,15 @@ class ServerTest(TestCase):
             'system_operational': 'Ubuntu',
             'ipaddress': '192.168.1.2'
         }
+        for i in [1,2]:
+            Application.objects.create(name='gunicorn-{0}'.format(i), description='http server {0}'.format(i))
 
         self.user = User.objects.create_user(username="testops", email='testops@google.com')
         self.user.set_password('123456')
         self.user.save()
         self.data = self.client.post(reverse('auth'), {'username': 'testops', 'password': '123456'})
         self.token = json.loads(self.data.content).get('token')
+
 
     def tearDown(self):
         # User.objects.all().delete()
@@ -55,15 +59,16 @@ class ServerTest(TestCase):
         u"""
             Teste para criar um servidor com aplicações
         """
-        self.post['applications'] = [1]
+        self.post['applications'] = [1,2]
 
         res = self.client.post(reverse('server-new'), self.post, HTTP_AUTHORIZATION='Token {0}'.format(self.token) )
         assert res.status_code == 201
 
-        server = Server.objects.get(name='cloudops')
+        server = Server.objects.get(name='cloudops', )
         assert server.name == self.post['name']
         assert server.ipaddress == self.post['ipaddress']
         assert server.system_operational == self.post['system_operational']
+        assert server.applications.values_list('id', flat=True), self.post['applications']
 
 
     def test_create_server_wrong_post(self):
