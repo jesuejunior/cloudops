@@ -16,6 +16,8 @@ python manage.py syncdb
 
 python manage.py migrate
 
+python manage.py collectstatic
+
 
 gunicorn --env DJANGO_SETTINGS_MODULE=cloudops.settings cloudops.wsgi -b :8000 -w 8
 

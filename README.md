@@ -54,3 +54,56 @@ ou para quem usa ZSH
 #### Opção rapida?
 
 * Clone o repositório, entre no diretório e execute ```$ bash build.sh```
+
+
+### Exemplos de uso
+
+#### DOCS
+
+* Abra o seguinte endereço http://127.0.0.1:8000/docs
+
+#### Efetuando login
+
+* Request
+
+```$ curl -H "Content-Type: application/json"  -X POST --data '{"username": "admin", "password": "admin"}' http://127.0.0.1:8000/auth ```
+
+* Response
+
+```$ {"token": "c7feffe7728cce3384bcce0b1d34bb81d9ad9a51"} ```
+
+#### Fazendo request na API
+
+* Request no endpoint para listar servidores /servers
+
+```$ curl -H "Content-Type: application/json" -H "Authorization: Token c7feffe7728cce3384bcce0b1d34bb81d9ad9a51" -X GET http://127.0.0.1:8000/servers ```
+
+* Response
+
+```json
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 1,
+            "name": "cloudops",
+            "ipaddress": "192.18.121.23",
+            "system_operational": "Ubuntu",
+            "applications": []
+        },
+        {
+            "id": 2,
+            "name": "cloudops",
+            "ipaddress": "192.18.121.213",
+            "system_operational": "Ubuntu",
+            "applications": []
+        }
+    ]
+}
+```
+
+
+
+
