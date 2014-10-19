@@ -10,8 +10,6 @@ source ~/.bashrc
 
 mkvirtualenv cloudops
 
-cd cloudops
-
 pip install -r requirements.pip
 
 python manage.py syncdb
