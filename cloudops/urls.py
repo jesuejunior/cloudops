@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.decorators.cache import cache_page
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from api.views import ServerList, ServerNew, ApplicationNew, ApplicationList, ApplicationEdit, ApplicationDelete, ApplicationDetail, ServerDetail, ServerEdit, ServerDelete
@@ -11,9 +10,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'cloudops.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^authentication/', 'rest_framework.authtoken.views.obtain_auth_token', name='auth'),
-    url(r'^docs/', include('rest_framework_swagger.urls')),
+    url(r'^admin', include(admin.site.urls)),
+    url(r'^auth', 'rest_framework.authtoken.views.obtain_auth_token', name='auth'),
+    url(r'^docs', include('rest_framework_swagger.urls')),
 )
 
 
