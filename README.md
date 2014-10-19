@@ -105,4 +105,13 @@ ou para quem usa ZSH
 
 
 
+###TO-DO
 
+- [ ] - Implementar API para registro de usuários
+- [ ] - Implementar permissionamento com grupos/usuários
+- [ ] - Corrigir bug de cadastrar applicações que ainda não existem para servidores
+
+
+# Duvidas??? Mail me!
+
+jesuesousa@gmail.com
