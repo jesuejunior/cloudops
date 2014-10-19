@@ -1,6 +1,8 @@
 
 ### Como executar o cloudOps
 
+* _Testado em Ubuntu 12.04/14.04 caso use outra distribuição faça as devidas alterações._
+
 Se já utiliza virtualenv ou não quer usar pode pular essa parte
 
 #### Passo 1 - Instalar e configurar virtualenv
@@ -21,11 +23,11 @@ ou para quem usa ZSH
 
 ```$ mkvirtualenv cloudops ```
 
-#### Passo 2 - Instalar dependencias
+#### Passo 2 -Fazer o clone do repositório e instalar dependências
 
 ```$ git clone git@github.com:jesuejunior/cloudops.git ```
 
-cd cloudops
+``` cd cloudops ```
 
 ```$ pip install -r requirements.pip ```
 
