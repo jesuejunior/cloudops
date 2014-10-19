@@ -9,7 +9,7 @@ Se já utiliza virtualenv ou não quer usar pode pular essa parte
 
 ``` $ sudo apt-get install python-pip ```
 
-sudo pip install virtualenvwrapper
+```$ sudo pip install virtualenvwrapper ```
 
 ```$ echo "export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'" >> ~/.bashrc ou ~/.zshrc ```
 
