@@ -1,7 +1,7 @@
 
 ### Como executar o cloudOps
 
-* _Testado em Ubuntu 12.04/14.04 caso use outra distribuição faça as devidas alterações._
+* _Testado no Ubuntu 12.04/14.04 caso use outra distribuição faça as devidas alterações._
 
 Se já utiliza virtualenv ou não quer usar pode pular essa parte
 
@@ -23,7 +23,7 @@ ou para quem usa ZSH
 
 ```$ mkvirtualenv cloudops ```
 
-#### Passo 2 -Fazer o clone do repositório e instalar dependências
+#### Passo 2 - Fazer o clone do repositório e instalar dependências
 
 ```$ git clone git@github.com:jesuejunior/cloudops.git ```
 
@@ -55,12 +55,11 @@ ou para quem usa ZSH
 
 * Clone o repositório, entre no diretório e execute ```$ bash build.sh```
 
-
-### Exemplos de uso
-
-#### DOCS
+#### Documentação completa de todos os endpoints
 
 * Abra o seguinte endereço http://127.0.0.1:8000/docs
+
+### Exemplos de uso
 
 #### Efetuando login
 
