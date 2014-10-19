@@ -22,13 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '&w&@6^8h-_r6zw7x^ag4*-!_u!fy(c9q5kxb80g3amgowj80rt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', True)
+DEBUG = False #os.getenv('DEBUG', True)
 
 print DEBUG
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -154,3 +154,10 @@ LOGGING = {
         },
     },
 }
+
+try:
+    from settings_local import *
+except ImportError:
+    # Usando stderr para nao poluir o output de comandos do manage.py
+    sys.stderr.write(u'Arquivo settings_local.py do backend nao foi encontrado, rodando com confs de DEV.')
+    sys.stderr.flush()
